@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<!--******************************************************************************************
+																			Mirror detector: prefilter								
+*******************************************************************************************-->
+
+	<node name="ohm_mirror_prefilter3d2"						pkg="ohm_mirror_detector3d"  type="ohm_mirror_prefilter3d" output="screen">
+  	<param name="sub_input_scan"      									type="string"  	value="/dist_coord_multi"/>
+
+		<param name="pub_scan"       															type="string"  	value="/prefiltered_scan"/>
+		<param name="pub_object"       														type="string"  	value="/object"/>
+		<param name="pub_transp"       														type="string"  	value="/obj_Transp"/>
+		<param name="pub_mirror"       														type="string"  	value="/obj_Mirror"/>
+		<param name="pub_affected" 	    													type="string"  	value="/affected"/>
+		<param name="pub_behTransp" 	    												type="string"  	value="/behTransp"/>
+		<param name="pub_behMirror" 	    												type="string"  	value="/behMirror"/>
+		<param name="pub_backprojMirror" 	    										type="string"  	value="/backprojMirror"/>
+		<param name="pub_cleaned" 	    													type="string"  	value="/cleaned_scan"/>
+		<param name="pub_marker"    															type="string"  	value="/marker"/>
+
+		<param name="source_frame"  															type="string"  	value="/laser"/>
+		<param name="destination_frame"    												type="string"  	value="/base_footprint"/>
+
+		<param name="min_measure_distance"												type="double"		value="0.023"/>
+		<param name="max_measure_distance"												type="double"		value="60.0"/>
+		<param name="outlierFilter_minNeighbors" 									type="int"  		value="50"/>
+		<param name="outlierFilter_searchRadius" 									type="double"  	value="0.1"/>
+		<param name="substract_threshold_distance" 								type="double"  	value="0.05"/>
+		<param name="planeDetection_threshold_distance"						type="double"  	value="0.05"/>
+		<param name="planeDetection_minAmountPoints"							type="int"  		value="100"/>
+		<param name="visionCone_threshold"												type="double"  	value="0.05"/>
+
+		<param name="max_Dist_ICP"																type="double"  	value="0.01"/>
+		<param name="fitness_Fct_ICP"															type="double"  	value="0.005"/>
+
+
+<!--		
+		<param name="outlierFilter_kMean" 												type="int"  	value="100"/>
+		<param name="outlierFilter_stdDeviation" 									type="double"  	value="0.1"/>
+		<param name="threshold_angle" 														type="double"  	value="0.01"/>	
+		<param name="particlefilter_threshold_dist_mirror" 				type="double"  	value="0.05"/>
+		<param name="particlefilter_threshold_dist_affected" 			type="double"  	value="0.08"/>
+		<param name="particlefilter_threshold_angle" 							type="int"  		value="5"/>
+		<param name="ransac_threshold"  													type="double"  	value="0.04"/>
+		<param name="ransac_iterations" 													type="int"  		value="100"/>
+		<param name="ransac_points2fit"  													type="int"  		value="20"/> -->
+	</node>
+
+
+<!--******************************************************************************************
+																			Mirror detector: postfilter 									
+*******************************************************************************************-->
+<!--
+	<node name = "ohm_mirror_postfilter" pkg = "ohm_mirror_detector" type = "ohm_mirror_postfilter" output = "screen">
+		  <param name = "sub_pose" 						type = "string" 		value = "sensor"/>
+		  <param name = "sub_maskScan" 				type = "string" 		value = "/maskScan"/>
+		  <param name = "sub_activatePub" 		type = "string" 		value = "/activatePub"/>
+
+		  <param name = "pub_marker" 					type = "string" 		value = "marker_post"/>
+		  <param name = "pub_scan" 						type = "string" 		value = "scan_corrected"/>
+		  <param name = "pub_mirror" 					type = "string" 		value = "mirror_empty"/>
+		  <param name = "thres_mirrorcorner" 	type = "double" 		value = "0.15"/>
+		  <param name = "thres_mirrorline" 	type = "double" 		value = "0.05"/>
+		  <param name = "thres_openingAnglePrefilter" 	type = "double" 		value = "0.05"/>
+		  <param name = "thres_angleThreshold" 	type = "double" 		value = "20"/>
+			<param name="ransac_threshold"  													type="double"  	value="0.04"/>
+			<param name="ransac_iterations" 													type="int"  		value="100"/>
+			<param name="ransac_points2fit"  													type="int"  		value="20"/> 
+	</node>
+-->
+<!--******************************************************************************************
+																					TF Transformations 									
+*******************************************************************************************-->
+
+<node pkg="tf" type="static_transform_publisher" name="link2laser" args="0 0 0 0 0 0 base_link laser 100"/>
+
+<node pkg="tf" type="static_transform_publisher" name="footprint2link" args="0 0 0 0 0 0 base_footprint base_link 100"/>
+
+</launch>
