@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<!--******************************************************************************************
+																			Mirror detector: 2dextractor									
+*******************************************************************************************-->
+
+	<node pkg="ohm_mirror_detector_3d" 									  type="ohm_2d_extractor" 	name="ohm_2d_extractor"		output="screen">
+  	<param name="sub_input_scan"      												type="string"  	value="/dist_coord_multi"/>
+		<param name="pub_scan"       															type="string"  	value="/2dscan"/>
+
+		<param name="choosenScanLinePoint"												type="int"  		value="180"/>
+		<param name="angle_min"																		type="double"  	value="-3.1416"/>		
+		<param name="angle_max"																		type="double"  	value="3.1416"/>		
+		<param name="range_min"																		type="double"  	value="0"/>
+		<param name="range_max"																		type="double"  	value="30.0"/>
+	</node>
+
+
+<node pkg="tf" type="static_transform_publisher" name="link2laser" args="0 0 0 0 0 0 base_link laser 100"/>
+
+<node pkg="tf" type="static_transform_publisher" name="footprint2link" args="0 0 0 0 0 0 base_footprint base_link 100"/>
+
+</launch>
