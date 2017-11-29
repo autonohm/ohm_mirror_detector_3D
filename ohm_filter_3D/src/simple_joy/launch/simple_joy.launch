@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+ <!--<node pkg="joy" name="joy_node" type="joy_node">
+    <param name="dev"              value="/dev/input/js0"   type="string"/>
+    <param name="autorepeat_rate"  value="12.0"/>
+  </node>-->
+	<node pkg = "simple_joy" type = "simple_joy" name = "simple_joy">
+		<param name = "topic_joy"   type = "string" value = "joy"/> 
+        <param name = "topic_twist" type = "string" value = "cmd/vel"/>
+        <param name = "thresh_vel"  type = "double" value = "5.0"/>
+	</node>	
+</launch>

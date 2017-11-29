@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<launch>
+
+<!--******************************************************************************************
+																					loop closure node 									
+*******************************************************************************************-->
+
+
+  <node name = "ohm_loopclosure" pkg = "ohm_loopclosure" type = "ohm_loopclosure" output = "screen">
+     	<param name = "sub_pose" type = "string" value = "/pose_raw"/>
+      <param name = "pub_loopClosed" type = "string" value = "/activatePub"/>
+
+      <param name = "thres_x" type = "double" value = "0.1"/>
+      <param name = "thres_y" type = "double" value = "0.1"/>
+      <param name = "thres_z" type = "double" value = "0.1"/>
+      <param name = "checkAfterPoses" type = "int" value = "500"/>
+
+  	<remap from="/ohm_loopclosure/activatePub" to ="/activatePub" /> 
+
+	</node>
+
+</launch>
